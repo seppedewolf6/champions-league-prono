@@ -171,6 +171,7 @@ cd frontend
 npm run dev
 ```
 
+
 **Wijzigingen committen**
 
 ```bash
