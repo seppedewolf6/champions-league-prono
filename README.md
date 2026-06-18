@@ -66,7 +66,7 @@ cd champions-league-prono
 Open PostgreSQL:
 
 ```bash
-psql -U postgres
+psql -U postgres -p 5433
 ```
 
 Maak database, gebruiker en geef rechten:
@@ -80,6 +80,7 @@ GRANT ALL PRIVILEGES ON DATABASE champions_league_prono TO prono_user;
 Verlaat PostgreSQL:
 
 ```sql
+\l voor alle db's te bekijken
 \q
 ```
 
@@ -94,7 +95,7 @@ cd backend
 Maak `src/main/resources/application.properties` aan:
 
 ```properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/champions_league_prono
+spring.datasource.url=jdbc:postgresql://localhost:5433/champions_league_prono
 spring.datasource.username=prono_user
 spring.datasource.password=password
 
@@ -115,8 +116,9 @@ mvn clean install
 Backend starten:
 
 ```bash
-# Windows
-mvnw.cmd spring-boot:run
+cd backend
+
+.\mvnw.cmd spring-boot:run
 ```
 
 Backend draait op: `http://localhost:8080`
@@ -167,18 +169,6 @@ cd backend
 ```bash
 cd frontend
 npm run dev
-```
-
-**Git wijzigingen ophalen**
-
-```bash
-git pull origin main
-```
-
-**Nieuwe branch maken**
-
-```bash
-git checkout -b feature/login
 ```
 
 **Wijzigingen committen**
