@@ -1,18 +1,40 @@
 package com.seppe.backend.domain;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+
 import java.util.UUID;
 
+@Entity
+@Table(name = "team_players", uniqueConstraints = {@UniqueConstraint(columnNames = {"team_id", "player_id"})})
 public class TeamPlayer {
-    private UUID id;
-    private UUID team_id;
-    private UUID player_id;
-    private boolean is_starter;
 
-    public TeamPlayer(UUID id, UUID team_id, UUID player_id, boolean is_starter) {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
+
+    @Column(name = "team_id", nullable = false)
+    private UUID teamId;
+
+    @Column(name = "player_id", nullable = false)
+    private UUID playerId;
+
+    @Column(name = "is_starter", nullable = false)
+    private boolean isStarter;
+
+    public TeamPlayer() {
+    }
+
+    public TeamPlayer(UUID id, UUID teamId, UUID playerId, boolean isStarter) {
         this.id = id;
-        this.team_id = team_id;
-        this.player_id = player_id;
-        this.is_starter = is_starter;
+        this.teamId = teamId;
+        this.playerId = playerId;
+        this.isStarter = isStarter;
     }
 
     public UUID getId() {
@@ -23,27 +45,27 @@ public class TeamPlayer {
         this.id = id;
     }
 
-    public UUID getTeam_id() {
-        return team_id;
+    public UUID getTeamId() {
+        return teamId;
     }
 
-    public void setTeam_id(UUID team_id) {
-        this.team_id = team_id;
+    public void setTeamId(UUID teamId) {
+        this.teamId = teamId;
     }
 
-    public UUID getPlayer_id() {
-        return player_id;
+    public UUID getPlayerId() {
+        return playerId;
     }
 
-    public void setPlayer_id(UUID player_id) {
-        this.player_id = player_id;
+    public void setPlayerId(UUID playerId) {
+        this.playerId = playerId;
     }
 
-    public boolean isIs_starter() {
-        return is_starter;
+    public boolean isStarter() {
+        return isStarter;
     }
 
-    public void setIs_starter(boolean is_starter) {
-        this.is_starter = is_starter;
+    public void setStarter(boolean starter) {
+        this.isStarter = starter;
     }
 }
