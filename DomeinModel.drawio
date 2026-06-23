@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net">
   <diagram name="Pagina-1" id="i6fFNji4mYPv9nNy3nL0">
-    <mxGraphModel dx="2200" dy="819" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1971" dy="624" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -233,7 +233,7 @@
           <mxGeometry height="26" width="140" y="78" as="geometry" />
         </mxCell>
         <mxCell id="_GAyE9PM4FowC43ExX1R-87" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="CompetitionSettings" vertex="1">
-          <mxGeometry height="130" width="190" x="-85" y="40" as="geometry" />
+          <mxGeometry height="156" width="190" x="-85" y="40" as="geometry" />
         </mxCell>
         <mxCell id="_GAyE9PM4FowC43ExX1R-88" parent="_GAyE9PM4FowC43ExX1R-87" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="UUID id" vertex="1">
           <mxGeometry height="26" width="190" y="26" as="geometry" />
@@ -246,6 +246,9 @@
         </mxCell>
         <mxCell id="_GAyE9PM4FowC43ExX1R-91" parent="_GAyE9PM4FowC43ExX1R-87" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="boolean teamsVisible" vertex="1">
           <mxGeometry height="26" width="190" y="104" as="geometry" />
+        </mxCell>
+        <mxCell id="brKXQd8NhDdX_FXaj0nh-3" parent="_GAyE9PM4FowC43ExX1R-87" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="boolean registrationOpen" vertex="1">
+          <mxGeometry height="26" width="190" y="130" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
