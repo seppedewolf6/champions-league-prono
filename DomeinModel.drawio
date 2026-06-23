@@ -247,7 +247,7 @@
         <mxCell id="_GAyE9PM4FowC43ExX1R-91" parent="_GAyE9PM4FowC43ExX1R-87" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="boolean teamsVisible" vertex="1">
           <mxGeometry height="26" width="190" y="104" as="geometry" />
         </mxCell>
-        <mxCell id="brKXQd8NhDdX_FXaj0nh-3" parent="_GAyE9PM4FowC43ExX1R-87" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="boolean registrationOpen" vertex="1">
+        <mxCell id="brKXQd8NhDdX_FXaj0nh-3" parent="_GAyE9PM4FowC43ExX1R-87" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="boolean registrationsOpen" vertex="1">
           <mxGeometry height="26" width="190" y="130" as="geometry" />
         </mxCell>
       </root>
