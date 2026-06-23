@@ -26,14 +26,22 @@ public class CompetitionSettings {
     @Column(name = "teams_visible", nullable = false)
     private boolean teamsVisible;
 
+    @Column(name = "registrations_open", nullable = false)
+    private boolean registrationsOpen;
 
-    public CompetitionSettings() {}
+    public CompetitionSettings() {
+        this.teamsLocked = false;
+        this.substitutionsAllowed = false;
+        this.teamsVisible = false;
+        this.registrationsOpen = true;
+    }
 
-    public CompetitionSettings(UUID id, boolean teamsLocked, boolean substitutionsAllowed, boolean teamsVisible) {
+    public CompetitionSettings(UUID id, boolean teamsLocked, boolean substitutionsAllowed, boolean teamsVisible, boolean registrationsOpen) {
         this.id = id;
         this.teamsLocked = teamsLocked;
         this.substitutionsAllowed = substitutionsAllowed;
         this.teamsVisible = teamsVisible;
+        this.registrationsOpen = registrationsOpen;
     }
 
     public UUID getId() {
@@ -66,5 +74,13 @@ public class CompetitionSettings {
 
     public void setTeamsVisible(boolean teamsVisible) {
         this.teamsVisible = teamsVisible;
+    }
+
+    public boolean isRegistrationsOpen() {
+        return registrationsOpen;
+    }
+
+    public void setRegistrationsOpen(boolean registrationsOpen) {
+        this.registrationsOpen = registrationsOpen;
     }
 }

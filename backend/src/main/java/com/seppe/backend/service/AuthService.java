@@ -1,12 +1,15 @@
 package com.seppe.backend.service;
 
+import com.seppe.backend.domain.CompetitionSettings;
 import com.seppe.backend.domain.user.User;
 import com.seppe.backend.domain.user.UserRole;
 import com.seppe.backend.dto.AuthResponse;
 import com.seppe.backend.dto.LoginRequest;
 import com.seppe.backend.dto.RegisterRequest;
 import com.seppe.backend.exception.InvalidCredentialsException;
+import com.seppe.backend.exception.RegistrationClosedException;
 import com.seppe.backend.exception.UserAlreadyExistsException;
+import com.seppe.backend.repository.CompetitionSettingsRepository;
 import com.seppe.backend.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,16 +19,32 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class AuthService {
     private final UserRepository userRepository;
+    private final CompetitionSettingsService competitionSettingsService;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
 
-    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService) {
+    public AuthService(
+            UserRepository userRepository,
+            CompetitionSettingsService competitionSettingsService,
+            PasswordEncoder passwordEncoder,
+            JwtService jwtService
+    ) {
         this.userRepository = userRepository;
+        this.competitionSettingsService = competitionSettingsService;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
     }
 
     public AuthResponse register(RegisterRequest request) {
+
+        CompetitionSettings settings =
+                competitionSettingsService.getSettings();
+
+        if (!settings.isRegistrationsOpen()) {
+            throw new RegistrationClosedException(
+                    "Registraties zijn gesloten"
+            );
+        }
 
         if (userRepository.existsByEmail(request.email())) {
             throw new UserAlreadyExistsException("Email already exists");

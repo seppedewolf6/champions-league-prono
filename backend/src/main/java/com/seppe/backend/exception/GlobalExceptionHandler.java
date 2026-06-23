@@ -1,5 +1,6 @@
 package com.seppe.backend.exception;
 
+import com.seppe.backend.dto.ApiError;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -8,25 +9,39 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(
-            UserAlreadyExistsException.class
-    )
-    public ResponseEntity<String> handleUserExists(
+    @ExceptionHandler(RegistrationClosedException.class)
+    public ResponseEntity<ApiError> handleRegistrationClosed(
+            RegistrationClosedException ex
+    ) {
+        return ResponseEntity
+                .status(HttpStatus.FORBIDDEN)
+                .body(new ApiError(ex.getMessage()));
+    }
+
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    public ResponseEntity<ApiError> handleUserExists(
             UserAlreadyExistsException ex
     ) {
         return ResponseEntity
-                .badRequest()
-                .body(ex.getMessage());
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new ApiError(ex.getMessage()));
     }
 
-    @ExceptionHandler(
-            InvalidCredentialsException.class
-    )
-    public ResponseEntity<String> handleCredentials(
+    @ExceptionHandler(InvalidCredentialsException.class)
+    public ResponseEntity<ApiError> handleCredentials(
             InvalidCredentialsException ex
     ) {
         return ResponseEntity
                 .status(HttpStatus.UNAUTHORIZED)
-                .body(ex.getMessage());
+                .body(new ApiError(ex.getMessage()));
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ApiError> handleGenericException(
+            Exception ex
+    ) {
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(new ApiError("Er is een onverwachte fout opgetreden."));
     }
 }
