@@ -1,6 +1,6 @@
 package com.seppe.backend.exception;
 
-import com.seppe.backend.dto.ApiError;
+import com.seppe.backend.dto.login.ApiError;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -40,8 +40,39 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiError> handleGenericException(
             Exception ex
     ) {
+        ex.printStackTrace();
+
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(new ApiError("Er is een onverwachte fout opgetreden."));
+                .body(new ApiError(ex.getMessage()));
     }
+
+    @ExceptionHandler(ClubNotFoundException.class)
+    public ResponseEntity<ApiError> handleClubNotFound(
+            ClubNotFoundException ex
+    ) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(new ApiError(ex.getMessage()));
+    }
+
+    @ExceptionHandler(PlayerNotFoundException.class)
+    public ResponseEntity<ApiError> handlePlayerNotFound(
+            PlayerNotFoundException ex
+    ) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(new ApiError(ex.getMessage()));
+    }
+
+    @ExceptionHandler(ClubAlreadyExistsException.class)
+    public ResponseEntity<ApiError> handleClubExists(
+            ClubAlreadyExistsException ex
+    ) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new ApiError(ex.getMessage()));
+    }
+
+
 }

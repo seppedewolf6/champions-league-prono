@@ -1,12 +1,16 @@
 package com.seppe.backend.domain.player;
 
+import com.seppe.backend.domain.Club;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 import java.util.UUID;
@@ -19,8 +23,9 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(name = "club_id", nullable = false)
-    private UUID clubId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "club_id", nullable = false)
+    private Club club;
 
     @Column(name = "external_api_id")
     private UUID externalApiId;
@@ -34,9 +39,9 @@ public class Player {
 
     public Player() {}
 
-    public Player(UUID id, UUID clubId, UUID externalApiId, String name, PlayerPosition position) {
+    public Player(UUID id, Club club, UUID externalApiId, String name, PlayerPosition position) {
         this.id = id;
-        this.clubId = clubId;
+        this.club = club;
         this.externalApiId = externalApiId;
         this.name = name;
         this.playerPosition = position;
@@ -50,12 +55,12 @@ public class Player {
         this.id = id;
     }
 
-    public UUID getClubId() {
-        return clubId;
+    public Club getClub() {
+        return club;
     }
 
-    public void setClubId(UUID clubId) {
-        this.clubId = clubId;
+    public void setClub(Club club) {
+        this.club = club;
     }
 
     public UUID getExternalApiId() {

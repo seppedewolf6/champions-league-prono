@@ -25,14 +25,18 @@ public class Team {
     private UUID captainPlayerId;
 
     @Column(nullable = false)
+    private String teamName;
+
+    @Column(nullable = false)
     private boolean locked;
 
     public Team() {}
 
-    public Team(UUID id, UUID userId, UUID captainPlayerId, boolean locked) {
+    public Team(UUID id, UUID userId, UUID captainPlayerId, String teamName, boolean locked) {
         this.id = id;
         this.userId = userId;
         this.captainPlayerId = captainPlayerId;
+        this.teamName = teamName;
         this.locked = locked;
     }
 
@@ -58,6 +62,18 @@ public class Team {
 
     public void setCaptain_player_id(UUID captainPlayerId) {
         this.captainPlayerId = captainPlayerId;
+    }
+
+    public void setCaptainPlayerId(UUID captainPlayerId) {
+        this.captainPlayerId = captainPlayerId;
+    }
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
     }
 
     public boolean isLocked() {
