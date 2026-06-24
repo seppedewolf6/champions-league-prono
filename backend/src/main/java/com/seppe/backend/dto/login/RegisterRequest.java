@@ -1,4 +1,4 @@
-package com.seppe.backend.dto;
+package com.seppe.backend.dto.login;
 
 public record RegisterRequest(
         String username,

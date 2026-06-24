@@ -1,4 +1,4 @@
-package com.seppe.backend.dto;
+package com.seppe.backend.dto.login;
 
 import com.seppe.backend.domain.user.UserRole;
 
