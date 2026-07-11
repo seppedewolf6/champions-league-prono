@@ -10,6 +10,7 @@ import AuthInput from "../components/auth/AuthInput";
 import AuthButton from "../components/auth/AuthButton";
 
 import {useAuth} from "../hooks/useAuth";
+import {getApiErrorMessage} from "../utils/apiError";
 
 
 const loginSchema = z.object({
@@ -65,10 +66,13 @@ export default function LoginPage() {
             navigate("/dashboard");
 
 
-        } catch {
+        } catch (error) {
 
             setServerError(
-                "Email of wachtwoord is fout."
+                getApiErrorMessage(
+                    error,
+                    "Email of wachtwoord is fout."
+                )
             );
 
         }

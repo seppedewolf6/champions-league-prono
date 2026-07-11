@@ -20,3 +20,8 @@ export interface CurrentUserResponse {
     email: string;
     role: string;
 }
+
+export interface ApiError {
+    message: string;
+    timestamp: string;
+}

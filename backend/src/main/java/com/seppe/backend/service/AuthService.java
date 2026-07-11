@@ -46,11 +46,11 @@ public class AuthService {
         }
 
         if (userRepository.existsByEmail(request.email())) {
-            throw new UserAlreadyExistsException("Email already exists");
+            throw new UserAlreadyExistsException("Dit e-mailadres is al in gebruik");
         }
 
         if (userRepository.existsByUsername(request.username())) {
-            throw new UserAlreadyExistsException("Username already exists");
+            throw new UserAlreadyExistsException("Deze gebruikersnaam is al in gebruik");
         }
 
         User user = new User(
@@ -76,13 +76,15 @@ public class AuthService {
     public AuthResponse login(LoginRequest request) {
 
         User user = userRepository.findByEmail(request.email())
-                .orElseThrow(InvalidCredentialsException::new);
+                .orElseThrow(() ->
+                        new InvalidCredentialsException("E-mailadres of wachtwoord is onjuist")
+                );
 
         if (!passwordEncoder.matches(
                 request.password(),
                 user.getPassword())) {
 
-            throw new InvalidCredentialsException();
+            throw new InvalidCredentialsException("E-mailadres of wachtwoord is onjuist");
         }
 
         String token = jwtService.generateToken(user);

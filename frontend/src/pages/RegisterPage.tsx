@@ -10,6 +10,7 @@ import AuthInput from "../components/auth/AuthInput";
 import AuthButton from "../components/auth/AuthButton";
 
 import {useAuth} from "../hooks/useAuth";
+import {getApiErrorMessage} from "../utils/apiError";
 
 
 const registerSchema = z.object({
@@ -61,17 +62,17 @@ export default function RegisterPage() {
 
             setServerError(null);
 
-
             await registerUser(data);
-
 
             navigate("/dashboard");
 
-
-        } catch {
+        } catch (error) {
 
             setServerError(
-                "Registreren mislukt. Controleer je gegevens."
+                getApiErrorMessage(
+                    error,
+                    "Registreren mislukt. Controleer je gegevens."
+                )
             );
 
         }
