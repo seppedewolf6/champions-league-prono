@@ -1,5 +1,5 @@
 // components/dashboard/DashboardHeader.tsx
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import logo from "../../assets/logo.png";
 import NavBar from "./NavBar";
@@ -33,10 +33,16 @@ export default function DashboardHeader() {
                         border-bottom: 1px solid rgba(255, 255, 255, 0.08);
                     }
 
+                    .dashboard-header__logo-link {
+                        display: flex;
+                        align-items: center;
+                        flex-shrink: 0;
+                    }
+
                     .dashboard-header__logo {
                         height: 36px;
                         width: auto;
-                        flex-shrink: 0;
+                        display: block;
                     }
 
                     .dashboard-header__logout {
@@ -69,11 +75,13 @@ export default function DashboardHeader() {
                 `}
             </style>
 
-            <img
-                src={logo}
-                alt="Champions League Prono"
-                className="dashboard-header__logo"
-            />
+            <Link to="/dashboard" className="dashboard-header__logo-link">
+                <img
+                    src={logo}
+                    alt="Champions League Prono"
+                    className="dashboard-header__logo"
+                />
+            </Link>
 
             <NavBar />
 

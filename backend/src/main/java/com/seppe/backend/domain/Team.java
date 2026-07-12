@@ -1,10 +1,15 @@
 package com.seppe.backend.domain;
 
+import com.seppe.backend.domain.player.Player;
+import com.seppe.backend.domain.user.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
@@ -18,11 +23,13 @@ public class Team {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(name = "user_id", nullable = false)
-    private UUID userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
-    @Column(name = "captain_player_id")
-    private UUID captainPlayerId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "captain_player_id")
+    private Player captain;
 
     @Column(nullable = false)
     private String teamName;
@@ -32,10 +39,10 @@ public class Team {
 
     public Team() {}
 
-    public Team(UUID id, UUID userId, UUID captainPlayerId, String teamName, boolean locked) {
+    public Team(UUID id, User user, Player captain, String teamName, boolean locked) {
         this.id = id;
-        this.userId = userId;
-        this.captainPlayerId = captainPlayerId;
+        this.user = user;
+        this.captain = captain;
         this.teamName = teamName;
         this.locked = locked;
     }
@@ -48,24 +55,20 @@ public class Team {
         this.id = id;
     }
 
-    public UUID getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(UUID userId) {
-        this.userId = userId;
+    public void setUser(User userId) {
+        this.user = user;
     }
 
-    public UUID getCaptainPlayerId() {
-        return captainPlayerId;
+    public Player getCaptain() {
+        return captain;
     }
 
-    public void setCaptain_player_id(UUID captainPlayerId) {
-        this.captainPlayerId = captainPlayerId;
-    }
-
-    public void setCaptainPlayerId(UUID captainPlayerId) {
-        this.captainPlayerId = captainPlayerId;
+    public void setCaptain(Player captain) {
+        this.captain = captain;
     }
 
     public String getTeamName() {

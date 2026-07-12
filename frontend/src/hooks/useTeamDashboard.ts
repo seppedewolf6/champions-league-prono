@@ -29,30 +29,11 @@ export function useTeamDashboard() {
 
         setState((prev) => ({ ...prev, loading: true, error: null }));
 
+        let team: TeamResponse | null;
+
         try {
-
-            const team = await getMyTeam();
-
-            if (!team) {
-                setState({
-                    loading: false,
-                    team: null,
-                    score: null,
-                    ranking: null,
-                    error: null,
-                });
-                return;
-            }
-
-            const [score, ranking] = await Promise.all([
-                getMyScore(),
-                getMyRanking(),
-            ]);
-
-            setState({ loading: false, team, score, ranking, error: null });
-
+            team = await getMyTeam();
         } catch {
-
             setState({
                 loading: false,
                 team: null,
@@ -60,8 +41,35 @@ export function useTeamDashboard() {
                 ranking: null,
                 error: "Er ging iets mis bij het ophalen van je dashboard.",
             });
-
+            return;
         }
+
+        if (!team) {
+            setState({
+                loading: false,
+                team: null,
+                score: null,
+                ranking: null,
+                error: null,
+            });
+            return;
+        }
+
+        // Score en ranking onafhankelijk van elkaar ophalen: als een van
+        // beide (nog) niet bestaat op de backend, mag dat de rest van het
+        // dashboard niet blokkeren.
+        const [scoreResult, rankingResult] = await Promise.allSettled([
+            getMyScore(),
+            getMyRanking(),
+        ]);
+
+        setState({
+            loading: false,
+            team,
+            score: scoreResult.status === "fulfilled" ? scoreResult.value : null,
+            ranking: rankingResult.status === "fulfilled" ? rankingResult.value : null,
+            error: null,
+        });
 
     }, []);
 

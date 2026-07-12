@@ -1,10 +1,14 @@
 package com.seppe.backend.domain;
 
+import com.seppe.backend.domain.player.Player;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
@@ -18,11 +22,13 @@ public class TeamPlayer {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(name = "team_id", nullable = false)
-    private UUID teamId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "team_id")
+    private Team team;
 
-    @Column(name = "player_id", nullable = false)
-    private UUID playerId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "player_id")
+    private Player player;
 
     @Column(name = "is_starter", nullable = false)
     private boolean isStarter;
@@ -30,10 +36,10 @@ public class TeamPlayer {
     public TeamPlayer() {
     }
 
-    public TeamPlayer(UUID id, UUID teamId, UUID playerId, boolean isStarter) {
+    public TeamPlayer(UUID id, Team team, Player player, boolean isStarter) {
         this.id = id;
-        this.teamId = teamId;
-        this.playerId = playerId;
+        this.team = team;
+        this.player = player;
         this.isStarter = isStarter;
     }
 
@@ -45,20 +51,20 @@ public class TeamPlayer {
         this.id = id;
     }
 
-    public UUID getTeamId() {
-        return teamId;
+    public Team getTeam() {
+        return team;
     }
 
-    public void setTeamId(UUID teamId) {
-        this.teamId = teamId;
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
-    public UUID getPlayerId() {
-        return playerId;
+    public Player getPlayer() {
+        return player;
     }
 
-    public void setPlayerId(UUID playerId) {
-        this.playerId = playerId;
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 
     public boolean isStarter() {

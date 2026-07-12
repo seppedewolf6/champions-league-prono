@@ -58,7 +58,7 @@ public class AuthService {
                 request.username(),
                 request.email(),
                 passwordEncoder.encode(request.password()),
-                true,
+                false,
                 UserRole.USER
         );
 

@@ -74,5 +74,13 @@ public class GlobalExceptionHandler {
                 .body(new ApiError(ex.getMessage()));
     }
 
+    @ExceptionHandler(TeamNotFoundException.class)
+    public ResponseEntity<ApiError> handleTeamNotFound(
+            TeamNotFoundException ex
+    ) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(new ApiError(ex.getMessage()));
+    }
 
 }
