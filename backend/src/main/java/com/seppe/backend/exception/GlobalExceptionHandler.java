@@ -83,4 +83,18 @@ public class GlobalExceptionHandler {
                 .body(new ApiError(ex.getMessage()));
     }
 
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<ApiError> handleUserNotFound(UserNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiError(ex.getMessage()));
+    }
+
+    @ExceptionHandler(PlayerScoreNotFoundException.class)
+    public ResponseEntity<ApiError> handlePlayerScoreNotFound(PlayerScoreNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiError(ex.getMessage()));
+    }
+
+    @ExceptionHandler(InvalidTrophyPositionException.class)
+    public ResponseEntity<ApiError> handleInvalidTrophyPosition(InvalidTrophyPositionException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiError(ex.getMessage()));
+    }
 }

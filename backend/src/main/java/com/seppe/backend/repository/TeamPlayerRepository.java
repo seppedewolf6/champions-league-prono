@@ -8,4 +8,6 @@ import java.util.UUID;
 
 public interface TeamPlayerRepository extends JpaRepository<TeamPlayer, UUID> {
     List<TeamPlayer> findByTeamId(UUID teamId);
+
+    List<TeamPlayer> findByPlayerIdAndIsStarterTrue(UUID playerId);
 }

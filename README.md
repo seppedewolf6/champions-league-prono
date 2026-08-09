@@ -67,6 +67,8 @@ Open PostgreSQL:
 
 ```bash
 psql -U postgres -p 5433
+
+password: 1234
 ```
 
 Maak database, gebruiker en geef rechten:
@@ -118,7 +120,9 @@ Backend starten:
 ```bash
 cd backend
 
-.\mvnw.cmd spring-boot:run
+mvn clean
+
+mvn spring-boot:run
 ```
 
 Backend draait op: `http://localhost:8080`

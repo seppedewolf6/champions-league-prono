@@ -3,6 +3,7 @@ package com.seppe.backend.repository;
 import com.seppe.backend.domain.Club;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -11,4 +12,5 @@ public interface ClubRepository
 
     Optional<Club> findByName(String name);
     boolean existsByName(String name);
+    List<Club> findByNameContainingIgnoreCase(String name);
 }
